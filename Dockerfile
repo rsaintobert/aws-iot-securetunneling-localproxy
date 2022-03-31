@@ -14,9 +14,9 @@ RUN yum check-update; yum upgrade -y && \
 RUN mkdir /home/dependencies
 WORKDIR /home/dependencies
 
-RUN wget https://www.zlib.net/zlib-1.2.11.tar.gz -O /tmp/zlib-1.2.11.tar.gz && \
-	tar xzvf /tmp/zlib-1.2.11.tar.gz && \
-	cd zlib-1.2.11 && \
+RUN wget https://www.zlib.net/zlib-1.2.12.tar.gz -O /tmp/zlib-1.2.12.tar.gz && \
+	tar xzvf /tmp/zlib-1.2.12.tar.gz && \
+	cd zlib-1.2.12 && \
 	./configure && \
 	make && \
 	make install && \
@@ -94,13 +94,13 @@ FROM amazonlinux:latest
 # Install openssl for libssl dependency.
 
 RUN yum check-update; yum upgrade -y && \
-    yum install -y openssl11 wget libatomic && \
-    rm -rf /var/cache/yum && \
-    yum clean all
+	yum install -y openssl11 wget libatomic && \
+	rm -rf /var/cache/yum && \
+	yum clean all
 
 RUN mkdir -p /home/aws-iot-securetunneling-localproxy/certs && \
-    cd /home/aws-iot-securetunneling-localproxy/certs && \
-    wget https://www.amazontrust.com/repository/AmazonRootCA1.pem && \
+	cd /home/aws-iot-securetunneling-localproxy/certs && \
+	wget https://www.amazontrust.com/repository/AmazonRootCA1.pem && \
 	openssl11 rehash ./
 
 # # Copy the binaries from builder stage.
